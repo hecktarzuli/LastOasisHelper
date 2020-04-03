@@ -23,9 +23,16 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-btn color="success" @click="$auth.loginWith('oauth2mock')"
-        >Login</v-btn
+      <v-btn
+        :v-if="loggedIn"
+        color="success"
+        @click="$auth.loginWith('discord')"
       >
+        Login
+      </v-btn>
+      <p>
+        {{ username }}
+      </p>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -65,7 +72,17 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Last Oasis Helper'
+      title: 'Last Oasis Helper',
+      username: '',
+      loggedIn: false
+    }
+  },
+  beforeMount() {
+    if (typeof window.localStorage.getItem('username') === 'string') {
+      this.username = window.localStorage.getItem('username')
+    }
+    if (typeof window.localStorage.getItem('access_token') === 'string') {
+      this.loggedIn = true
     }
   }
 }

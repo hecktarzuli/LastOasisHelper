@@ -60,12 +60,12 @@ module.exports = {
    */
   auth: {
     strategies: {
-      oauth2mock: {
+      discord: {
         _scheme: 'oauth2',
         authorization_endpoint: 'https://discordapp.com/api/oauth2/authorize',
         access_token_endpoint: 'https://discordapp.com/api/oauth2/token',
         scope: ['identify'],
-        redirect_uri: 'http://127.0.0.1:3000/callback',
+        redirect_uri: 'http://127.0.0.1:3000/login',
         client_id: '695321877538799726',
         response_type: 'code'
       }
