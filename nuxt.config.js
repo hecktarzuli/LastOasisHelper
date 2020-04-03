@@ -37,7 +37,9 @@ module.exports = {
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    // Doc: https://github.com/nuxt-community/dotenv-module
+    '@nuxtjs/dotenv'
   ],
   /*
    ** Nuxt.js modules
@@ -45,8 +47,7 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv',
+    '@nuxtjs/auth',
     'nuxt-leaflet'
   ],
   /*
@@ -54,6 +55,22 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
+  /*
+   ** Auth
+   */
+  auth: {
+    strategies: {
+      discord: {
+        _scheme: 'oauth2',
+        authorization_endpoint: 'https://discordapp.com/api/oauth2/authorize',
+        access_token_endpoint: 'https://discordapp.com/api/oauth2/token',
+        scope: ['identify'],
+        redirect_uri: 'http://127.0.0.1:3000/login',
+        client_id: '695321877538799726',
+        response_type: 'code'
+      }
+    }
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
