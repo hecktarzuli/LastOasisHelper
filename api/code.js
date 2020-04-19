@@ -10,8 +10,7 @@ export default (req, res) => {
         client_secret: process.env.CLIENT_SECRET,
         grant_type: 'authorization_code',
         code: req.query.code,
-        redirect_uri:
-          process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:3000/login' : 'https://nomads-notebook.uc.r.appspot.com/login',
+        redirect_uri: `${process.env.baseUrl}/login`,
         scope: 'identify'
       }),
       {

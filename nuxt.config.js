@@ -3,7 +3,7 @@ const colors = require('vuetify/es5/util/colors').default
 module.exports = {
   mode: 'universal',
   env: {
-    baseUrl: process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:3000' : 'https://nomads-notebook.uc.r.appspot.com'
+    baseUrl: process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:3000' : 'https://nomads-notebook.herokuapp.com/'
   },
   /*
    ** Headers of the page
