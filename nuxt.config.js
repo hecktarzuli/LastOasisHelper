@@ -19,6 +19,7 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
+  serverMiddleware: [{ path: '/api/code', handler: '~/api/code.js' }],
   /*
    ** Customize the progress-bar color
    */
@@ -30,7 +31,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '~/plugins/auth', mode: 'client' }, '~/plugins/api'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -47,30 +48,14 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/auth',
-    'nuxt-leaflet'
+    'nuxt-leaflet',
+    'cookie-universal-nuxt'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
-  /*
-   ** Auth
-   */
-  auth: {
-    strategies: {
-      discord: {
-        _scheme: 'oauth2',
-        authorization_endpoint: 'https://discordapp.com/api/oauth2/authorize',
-        access_token_endpoint: 'https://discordapp.com/api/oauth2/token',
-        scope: ['identify'],
-        redirect_uri: 'http://127.0.0.1:3000/login',
-        client_id: '695321877538799726',
-        response_type: 'code'
-      }
-    }
-  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module

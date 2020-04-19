@@ -24,15 +24,14 @@
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <v-btn
-        :v-if="loggedIn"
         color="success"
-        @click="$auth.loginWith('discord')"
+        :disabled="$store.state.auth.loggedIn"
+        @click="$auth.login()"
       >
-        Login
+        {{
+          $store.state.auth.loggedIn ? $store.state.auth.user.username : 'Login'
+        }}
       </v-btn>
-      <p>
-        {{ username }}
-      </p>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -69,20 +68,7 @@ export default {
           to: '/map'
         }
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Last Oasis Helper',
-      username: '',
-      loggedIn: false
-    }
-  },
-  beforeMount() {
-    if (typeof window.localStorage.getItem('username') === 'string') {
-      this.username = window.localStorage.getItem('username')
-    }
-    if (typeof window.localStorage.getItem('access_token') === 'string') {
-      this.loggedIn = true
+      title: 'Last Oasis Helper'
     }
   }
 }
