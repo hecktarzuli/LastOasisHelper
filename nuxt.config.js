@@ -6,8 +6,9 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    titleTemplate: (titleChunk) => {
+      return titleChunk ? `${titleChunk} - Nomad's Notebook` : "Nomad's Notebook"
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -66,16 +67,22 @@ module.exports = {
       dark: true,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
+          primary: colors.orange.darken3,
+          accent: colors.blueGrey.darken4,
+          secondary: colors.amber.darken4,
           info: colors.teal.lighten1,
-          warning: colors.amber.base,
+          warning: colors.amber.darken1,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          success: colors.green.accent4
         }
       }
     }
+  },
+  /*
+   ** Router configuration
+   */
+  router: {
+    middleware: ['auth']
   },
   /*
    ** Build configuration

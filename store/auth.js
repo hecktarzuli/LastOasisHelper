@@ -22,6 +22,12 @@ export const mutations = {
   },
   logout(state) {
     state.loggedIn = false
-    state.user = {}
+    state.access_token = null
+    state.refresh_token = null
+    state.user = {
+      id: '',
+      username: '',
+      avatar: ''
+    }
   }
 }

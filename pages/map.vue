@@ -1,19 +1,7 @@
 <template>
   <no-ssr>
-    <l-map
-      id="tree"
-      ref="tree"
-      :options="options"
-      :crs="crs"
-      :prefer-canvas="true"
-    >
-      <l-image-overlay
-        ref="treeImage"
-        :bounds="bounds"
-        :center="center"
-        url="./map.png"
-      >
-      </l-image-overlay>
+    <l-map id="tree" ref="tree" :options="options" :crs="crs" :prefer-canvas="true">
+      <l-image-overlay ref="treeImage" :bounds="bounds" :center="center" url="./map.png"> </l-image-overlay>
     </l-map>
   </no-ssr>
 </template>

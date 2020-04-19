@@ -2,14 +2,7 @@
   <v-app dark>
     <v-navigation-drawer v-model="drawer" clipped fixed app>
       <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-          nuxt
-        >
+        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact nuxt>
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -20,17 +13,16 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar clipped-left fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
+      <v-app-bar-nav-icon color="primary" @click.stop="drawer = !drawer" />
+      <v-toolbar-title class="secondary--text" v-text="title" />
       <v-spacer />
-      <v-btn
-        color="success"
-        :disabled="$store.state.auth.loggedIn"
-        @click="$auth.login()"
-      >
-        {{
-          $store.state.auth.loggedIn ? $store.state.auth.user.username : 'Login'
-        }}
+      <v-btn v-if="loggedIn" color="warning" class="mr-2 accent--text" @click="$auth.logout">
+        <v-icon left>mdi-power</v-icon>
+        Logout
+      </v-btn>
+      <v-btn color="primary" :disabled="loggedIn" :loading="uLoading" @click="login">
+        <v-icon left>mdi-account</v-icon>
+        {{ loggedIn ? $store.state.auth.user.username : 'Login' }}
       </v-btn>
     </v-app-bar>
     <v-content>
@@ -45,6 +37,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data() {
     return {
@@ -68,7 +62,24 @@ export default {
           to: '/map'
         }
       ],
-      title: 'Last Oasis Helper'
+      title: "Nomad's Notebook"
+    }
+  },
+  computed: {
+    ...mapState({
+      loggedIn: (state) => state.auth.loggedIn,
+      username: (state) => state.auth.user.username,
+      avatar: (state) => state.auth.user.avatar,
+      uLoading: (state) => state.loading.user
+    })
+  },
+  mounted() {
+    this.$auth.verifyAuth()
+  },
+  methods: {
+    login() {
+      this.$store.commit('loading', { t: 'user', v: true })
+      this.$auth.login()
     }
   }
 }
