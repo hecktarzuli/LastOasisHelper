@@ -1,6 +1,6 @@
-export default ({ $axios }, inject) => {
+export default ({ $axios, env }, inject) => {
   const api = $axios.create({
-    baseURL: process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1/api' : '',
+    baseURL: `${env.baseUrl}/api`,
     timeout: 1000
   })
 

@@ -5,7 +5,7 @@ import EventEmitter from 'eventemitter3'
 const ACCESS_TOKEN = 'auth-access-token'
 const REFRESH_TOKEN = 'auth-refresh-token'
 
-export default ({ app, store, redirect, $axios }, inject) => {
+export default ({ app, store, redirect, $axios, env }, inject) => {
   const discordAuth = $axios.create({
     baseURL: process.env.OAUTH2_URL,
     timeout: 1000
@@ -45,7 +45,7 @@ export default ({ app, store, redirect, $axios }, inject) => {
       const nonce = crypto.randomBytes(16).toString('base64')
       const params = {
         client_id: process.env.CLIENT_ID,
-        redirect_uri: process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:3000/login' : '',
+        redirect_uri: `${env.baseUrl}/login`,
         response_type: 'code',
         scope: 'identify',
         state: nonce
@@ -62,7 +62,7 @@ export default ({ app, store, redirect, $axios }, inject) => {
         // check state
         if (queryParams.state !== sessionStorage.getItem('nonce')) return reject(new Error('Invalid state!'))
         $axios
-          .get(`http://127.0.0.1:3000/api/code?code=${queryParams.code}`)
+          .get(`${env.baseUrl}/api/code?code=${queryParams.code}`)
           .then(({ data }) => {
             this.setTokens(data)
             return this.setUser()
@@ -87,7 +87,7 @@ export default ({ app, store, redirect, $axios }, inject) => {
               client_secret: process.env.CLIENT_SECRET,
               grant_type: 'refresh_token',
               refresh_token,
-              redirect_uri: process.env.REDIRECT_URI,
+              redirect_uri: `${env.baseUrl}/login`,
               scope: 'identify'
             }),
             {
