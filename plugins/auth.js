@@ -7,7 +7,7 @@ const REFRESH_TOKEN = 'auth-refresh-token'
 
 export default ({ app, store, redirect, $axios, env }, inject) => {
   const discordAuth = $axios.create({
-    baseURL: process.env.OAUTH2_URL,
+    baseURL: env.oauth2Url,
     timeout: 1000
   })
 
@@ -44,7 +44,7 @@ export default ({ app, store, redirect, $axios, env }, inject) => {
     login() {
       const nonce = crypto.randomBytes(16).toString('base64')
       const params = {
-        client_id: process.env.CLIENT_ID,
+        client_id: env.clientId,
         redirect_uri: `${env.baseUrl}/login`,
         response_type: 'code',
         scope: 'identify',
@@ -53,7 +53,7 @@ export default ({ app, store, redirect, $axios, env }, inject) => {
       sessionStorage.removeItem('nonce')
       sessionStorage.setItem('nonce', nonce)
       setTimeout(() => {
-        location.replace(`${process.env.OAUTH2_URL}/authorize?${stringify(params)}`)
+        location.replace(`${env.oath2Url}/authorize?${stringify(params)}`)
       }, 500)
     }
 
@@ -83,8 +83,8 @@ export default ({ app, store, redirect, $axios, env }, inject) => {
           .post(
             '/token',
             stringify({
-              client_id: process.env.CLIENT_ID,
-              client_secret: process.env.CLIENT_SECRET,
+              client_id: env.clientId,
+              client_secret: env.clientSecret,
               grant_type: 'refresh_token',
               refresh_token,
               redirect_uri: `${env.baseUrl}/login`,
