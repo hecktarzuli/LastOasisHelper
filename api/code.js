@@ -1,7 +1,7 @@
 import { stringify } from 'querystring'
 import axios from 'axios'
 
-export default (req, res) => {
+export default (req, res, next) => {
   res.status(200).send(req.query)
   // axios
   //   .post(
