@@ -2,6 +2,8 @@ import { stringify } from 'querystring'
 import axios from 'axios'
 
 export default (request, response, next) => {
+  console.log(request)
+  console.log(response)
   response.status(200).send(request.query)
   // axios
   //   .post(
