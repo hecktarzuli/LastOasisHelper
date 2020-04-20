@@ -5,8 +5,7 @@ module.exports = {
   env: {
     baseUrl: process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:3000' : 'https://nomads-notebook.herokuapp.com/',
     clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    oauth2Url: 'https://discordapp.com/api/oauth2'
+    oauth2Url: process.env.OAUTH2_URL
   },
   /*
    ** Headers of the page

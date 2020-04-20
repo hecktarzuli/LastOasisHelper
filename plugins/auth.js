@@ -53,7 +53,7 @@ export default ({ app, store, redirect, $axios, env }, inject) => {
       sessionStorage.removeItem('nonce')
       sessionStorage.setItem('nonce', nonce)
       setTimeout(() => {
-        location.replace(`${env.oath2Url}/authorize?${stringify(params)}`)
+        location.replace(`${env.oauth2Url}/authorize?${stringify(params)}`)
       }, 500)
     }
 
