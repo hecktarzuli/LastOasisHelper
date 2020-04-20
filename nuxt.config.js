@@ -2,7 +2,7 @@ const colors = require('vuetify/es5/util/colors').default
 
 let baseUrl = 'http://127.0.0.1:3000'
 if (process.env.NODE_ENV === 'staging') baseUrl = 'https://nomads-staging.herokuapp.com'
-else if (process.env.NODE_ENV === 'production') baseUrl = 'https://nomadsnotebook.herokuapp.com/'
+else if (process.env.NODE_ENV === 'production') baseUrl = 'https://nomadsnotebook.herokuapp.com'
 
 module.exports = {
   mode: 'universal',
