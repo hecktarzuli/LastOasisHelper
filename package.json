@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Helper webapp for Last Oasis",
   "author": "Machine Maker",
+  "engines": {
+    "node": "12.13.x"
+  },
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
