@@ -8,7 +8,9 @@ const app = express()
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
 
-process.env.baseUrl = process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:3000' : 'https://nomads-notebook.herokuapp.com/'
+process.env.baseUrl = 'http://127.0.0.1:3000'
+if (process.env.NODE_ENV === 'staging') process.env.baseUrl = 'https://nomads-staging.herokuapp.com'
+else if (process.env.NODE_ENV === 'production') process.env.baseUrl = 'https://nomadsnotebook.herokuapp.com'
 
 async function start() {
   // Init Nuxt.js

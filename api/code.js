@@ -1,8 +1,8 @@
 import { stringify } from 'querystring'
 import axios from 'axios'
 
-export default (req, res, next) => {
-  res.status(200).send(req.query)
+export default (request, response, next) => {
+  response.status(200).send(request.query)
   // axios
   //   .post(
   //     `${process.env.OAUTH2_URL}/token`,
